@@ -31,6 +31,11 @@ namespace Assignment2_S19
             int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206};
             int[] brr = {203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204};
             int[] r2 = missingNumbers(arr1, brr);
+            Console.Write("\nThe Complete array is: ");
+            displayArray(brr);
+            Console.Write("\nThe smaller array is: ");
+            displayArray(arr1);
+            Console.Write("\nThe missing numbers in array are: ");
             displayArray(r2);
             
             // grading students
