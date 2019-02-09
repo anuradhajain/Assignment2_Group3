@@ -7,6 +7,7 @@ namespace Assignment2_S19
     {
         static void Main(string[] args)
         {
+            // added this line
             // left rotation
             Console.WriteLine("Left Rotation");
             int d = 4;
