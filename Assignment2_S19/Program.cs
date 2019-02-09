@@ -7,7 +7,6 @@ namespace Assignment2_S19
     {
         static void Main(string[] args)
         {
-            // added this line
             // left rotation
             Console.WriteLine("Left Rotation");
             int d = 4;
@@ -54,7 +53,7 @@ namespace Assignment2_S19
             Console.WriteLine("\n\nDay of Programmer");
             int year = 2017;
             Console.WriteLine(dayOfProgrammer(year));
-        }
+        } // end of main
 
         static void displayArray(int []arr) {
             Console.WriteLine();
@@ -111,5 +110,5 @@ namespace Assignment2_S19
         {
             return "";
         }
-    }
-}
+    } // end of class
+} // end of namespace
