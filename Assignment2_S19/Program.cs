@@ -293,7 +293,7 @@ namespace Assignment2_S19
                 }
                 else
                 {
-                    missarray[i] = 500;
+                    missarray[i] = 0;
                 }
 
             } // end of for loop i
