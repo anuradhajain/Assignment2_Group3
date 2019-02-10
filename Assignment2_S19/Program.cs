@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -251,18 +252,21 @@ namespace Assignment2_S19
 
                     return "No";
         }
-    
-    
+
+
         //------------------------------------------------------------------------------------------------------------------
         // missing number method
         static int[] missingNumbers(int[] arr, int[] brr)
         {
-            // creating an empty array to store the missing elemnts
-            int[] missarray = new int[brr.Length];
+            // ===========
+            // creating an empty a list to store the missing elements
+            ArrayList l = new ArrayList();
+            // ===========
+
             // for loop for each array element
             for (int i = 0; i < brr.Length; i++)
             {
-                // calculating the frequeny of that array element in array brr
+                // calculating the frequency of that array element in array brr
                 int freq1 = 0;
                 for (int j = 0; j < brr.Length; j++)
                 {
@@ -273,7 +277,7 @@ namespace Assignment2_S19
 
                 } // end of for loop j
 
-                // calculating the frequeny of that array element in array arr
+                // calculating the frequency of that array element in array arr
                 int freq2 = 0;
                 for (int k = 0; k < arr.Length; k++)
                 {
@@ -284,21 +288,33 @@ namespace Assignment2_S19
 
                 } // end of for loop k 
 
-                // if the frequency of that number in array brr is not equal to its frequency in arr, print it, meaning its missing
+                // if the frequency of that number in array brr is not equal to its frequency in arr, add it to the missing element array, meaning its missing
                 if (freq1 != freq2 || freq1 > freq2)
                 {
-                    // storing the missing element to missarray
-                    missarray[i] = brr[i];
-                    //Console.WriteLine(brr[i]);
-                }
-                else
-                {
-                    missarray[i] = 0;
+                    // ========
+                    // storing the missing element in the list
+                    l.Add(brr[i]);
+                    // ==========
                 }
 
             } // end of for loop i
-            return missarray.Distinct().ToArray(); ;
+
+            //============
+            // creating an empty array to store missing numbers from list to this array
+            int[] missarray = new int[l.Count];
+
+            // copying each number from the list to the array
+            int ind = 0;
+            foreach (int i in l)
+            {
+                missarray[ind] = i;
+                ind++;
+            } // end of foreach loop
+            //=============
+
+            return missarray.Distinct().ToArray();
         } // end of missingNumbers method
+
         //-------------------------------------------------------------------------------------------------------------
         // Complete the gradingStudents function below.
         private static int[] gradingStudents(int[] grades)
