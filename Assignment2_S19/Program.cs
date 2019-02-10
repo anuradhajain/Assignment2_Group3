@@ -4,55 +4,66 @@ using System.Linq;
 
 namespace Assignment2_S19
 {
-    class Program //Rushi test
+    class Program 
     {
         static void Main(string[] args)
         {
+            // --------------------- Question 1 --------------------
             // left rotation
             Console.WriteLine("Left Rotation");
             int d = 4;
             int[] a = { 1, 2, 3, 4, 5 };
+            Console.WriteLine("The Original Array is: ");
+            displayArray(a);
+            Console.WriteLine("\nThe Left Roatated Array is: ");
             int[] r = rotLeft(a, d);
             displayArray(r);
-
+            Console.WriteLine("\n------------------------------------------------------");
+            // --------------------- Question 2 --------------------
             // Maximum toys
-            Console.WriteLine("\n\nMaximum toys");
+            Console.WriteLine("\nMaximum toys");
             int k = 50;
             int[] prices = { 1, 12, 5, 111, 200, 1000, 10 };
             Console.WriteLine(maximumToys(prices, k));
-            
+            Console.WriteLine("\n------------------------------------------------------");
+            // --------------------- Question 3 --------------------
             // Balanced sums
-            Console.WriteLine("\n\nBalanced sums");
-            List<int> arr = new List<int> { 1, 2, 3 };
+            Console.WriteLine("\nBalanced sums");
+            List<int> arr = new List<int> { 1, 2, 3, 3 };
             Console.WriteLine(balancedSums(arr));
-            
+            Console.WriteLine("\n------------------------------------------------------");
+            // --------------------- Question 4 --------------------
             // Missing numbers
-            Console.WriteLine("\n\nMissing numbers");
+            Console.WriteLine("\nMissing numbers");
             int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206};
             int[] brr = {203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204};
             int[] r2 = missingNumbers(arr1, brr);
-            Console.Write("\nThe Complete array is: ");
+            Console.WriteLine("\nThe Complete array is: ");
             displayArray(brr);
-            Console.Write("\nThe smaller array is: ");
+            Console.WriteLine("\nThe smaller array is: ");
             displayArray(arr1);
-            Console.Write("\nThe missing numbers in array are: ");
+            Console.WriteLine("\nThe missing numbers in array are: ");
             displayArray(r2);
-            
+            Console.WriteLine("\n------------------------------------------------------");
+            // --------------------- Question 5 --------------------
+            // calling gradingstudent method by passing the array of student grades
+
             // grading students
-            Console.WriteLine("\n\nGrading students");
-            int[] grades = { 73, 67, 38, 33 };
+            Console.WriteLine("\nGrading students");
+            int[] grades = { 73, 67, 38, 33, 82, 46, 74, 48, 98, 59 };
             int[] r3 = gradingStudents(grades);
             displayArray(r3);
-
+            Console.WriteLine("\n------------------------------------------------------");
+            // --------------------- Question 6 --------------------
             // find the median
-            Console.WriteLine("\n\nFind the median");
+            Console.WriteLine("\nFind the median");
             int[] arr2 = { 0, 1, 2, 4, 6, 5, 3};
             Console.WriteLine("median is :" + findMedian(arr2));
 
-
-
+            Console.WriteLine("\n------------------------------------------------------");
+            // --------------------- Question 7 --------------------
             // closest numbers
-            Console.WriteLine("\n\nClosest numbers");
+            Console.WriteLine("\nClosest numbers");
             int[] arr3 = { 1, 2, 4, 5, 9, 7, 11, 8, 9, 10 };
             Console.WriteLine("The Test array is as below :");
             displayArray(arr3);
@@ -62,11 +73,16 @@ namespace Assignment2_S19
 
             displayArray(r4);
 
-
+            Console.WriteLine("\n------------------------------------------------------");
+            // --------------------- Question 8 --------------------
+            // calling Day of Programmer method by passing the array of student grades
             // Day of programmer
-            Console.WriteLine("\n\nDay of Programmer");
-            int year = 2017;
+            Console.WriteLine("\nDay of Programmer");
+            int year = 1978;
             Console.WriteLine(dayOfProgrammer(year));
+            Console.ReadKey();
+           
+
             
             // Display exit message
             Console.WriteLine("\nPress any key to exit");
@@ -285,10 +301,43 @@ namespace Assignment2_S19
         } // end of missingNumbers method
         //-------------------------------------------------------------------------------------------------------------
         // Complete the gradingStudents function below.
-        static int[] gradingStudents(int[] grades)
+        private static int[] gradingStudents(int[] grades)
+        // The below piece of code will display the array of the grades decaled in the main fucntion.
+        //This will provide a good reference for the rounded up grades to compare later
         {
-            return new int[] { };
-        }
+            Console.Write("The Grades of Students are:");
+            displayArray(grades);
+            Console.WriteLine("\n");
+
+
+            //The main piece of code does not round off these scores.
+            for (int i = 0; i < grades.Length; i++)
+            {
+                while (grades[i] < 0 || grades[i] > 100)//Here We are checking if the grades entered into the array are between 0 to 100 only
+
+                {
+                    Console.WriteLine("Please enter valid grades betweeen 0 to 100 for : " + grades[i]);//For Any grades grater than 100 or less than 0, the code prints user to enter valid grades corresponding to those grades.
+                    break;
+                }
+            }
+            //This is the round off piece of code
+            for (int j = 0; j < grades.Length; j++)
+            {
+                int a = 5 * (int)Math.Round((grades[j] / 5.0) + 0.5); //This line checks for every elements in array and perform operation to get a next possible number who is multiple of 5
+                if (a - grades[j] < 3 && grades[j] >= 38) //We check the 2 conditions; if no is greater that 38 and difference between original no. and 'a' is less than 3 as per rounding off rule
+                {
+                    grades[j] = a;//if the condition is true we update the value of current array with rounded of multiple of five i.e.'a'
+                }
+                else
+                {
+                    grades[j] = grades[j];//else the number of array is kept as is
+                }
+            }
+            //The rounded off grades are provided here.
+            Console.Write("The Rounded off Grades of Students are as below:");
+            return grades;
+        }//End of Grading Student method
+
         //------------------------------------------------------------------------------------------------------------------
         // Complete the findMedian function below.
         static int findMedian(int[] arr)
@@ -320,7 +369,7 @@ namespace Assignment2_S19
             {
 
                 median = (arr3[(count / 2)]);  // count is odd, get the middle element.
-                Console.ReadKey(true);
+                
             }
             else if (count == 0)
 
@@ -369,10 +418,54 @@ namespace Assignment2_S19
            
         
         //---------------------------------------------------------------------------------------------------------------
-        // Complete the dayOfProgrammer function below.
+                // Complete the dayOfProgrammer function below.
         static string dayOfProgrammer(int year)
+        // The below piece of code will display the Day of Programer i.e. 256th Date of year. 
         {
+            Console.WriteLine("The Year input is : " + year); //The year inout given in main method is displayed
+            int a = year;
+            string b;
+            if (a >= 1700 && a <= 1917)//Condition for year value is checked here.
+            {
+                Console.WriteLine("This is year of Julian Calender");//If above condtion is true the code prints Julian Calender
+                if (a % 4 == 0)//Condition for leap year for Julian calnder is checked,if above condition is true then bewlo value is updated in 'b'
+                {
+                    b = "12.09"; 
+                    Console.WriteLine("The day of Programmer is : " + b + "." + a);
+                }
+                else //If the above condition is not met then Below date is stored in 'b'
+                {
+                    b = "13.09";
+                    Console.WriteLine("The day of Programmer is : " + b + "." + a);
+                }
+            }
+            else if (a > 1918 && a <= 2700)//Condition for year value is checked here.
+            {
+                Console.WriteLine("This is year of Gregorian Calender");//If above condtion is true the code prints Gregorian Calender
+                if (a % 400 == 0 || (a % 4 == 0 && a % 100 != 0))//Condition for Gregorian leap year is checked here
+                {
+                    b = "12.09";
+                    Console.WriteLine("The day of Programmer is : " + b + "." + a);
+                }
+                else//If not leap year then below value is stored in 'b'
+                {
+                    b = "13.09";
+                    Console.WriteLine("The day of Programmer is : " + b + "." + a);
+                }
+            }
+            else if (a == 1918) //This is a particular case of Calender Transformation year
+            {
+                Console.WriteLine("This is Transition year of Russian Calender System");
+                b = "26.09";
+                Console.WriteLine("The day of Programmer is : " + b + "." + a);
+            }
+            else// If the year range is not as specified above, then below code is executed
+            {
+                Console.WriteLine("The year " + a + " entered is out of range");
+            }
+
             return "";
-        }
+        }//End of Day of programmer  
+
     } // end of class
 } // end of namespace
