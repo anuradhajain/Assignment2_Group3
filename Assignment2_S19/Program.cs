@@ -48,14 +48,20 @@ namespace Assignment2_S19
             Console.WriteLine("\n\nFind the median");
             int[] arr2 = { 0, 1, 2, 4, 6, 5, 3};
             Console.WriteLine("median is :" + findMedian(arr2));
-            
+
 
 
             // closest numbers
             Console.WriteLine("\n\nClosest numbers");
-            int[] arr3 = { 5, 4, 3, 2 };
+            int[] arr3 = { 1, 2, 4, 5, 9, 7, 11, 8, 9, 10 };
+            Console.WriteLine("The Test array is as below :");
+            displayArray(arr3);
+            Console.WriteLine("\n");
+            Console.WriteLine("The Closest Pair array is as below: ");
             int[] r4 = closestNumbers(arr3);
+
             displayArray(r4);
+
 
             // Day of programmer
             Console.WriteLine("\n\nDay of Programmer");
@@ -165,12 +171,72 @@ namespace Assignment2_S19
                 return (i - 1);
             }
         } // end of maximumToys method
-
+        //-------------------------------------------------------------------------------------------------------------------
         // Complete the balancedSums function below.
         static string balancedSums(List<int> arr)
         {
-            return "";
+            int n = arr.Count;
+
+            int[] arr2 = arr.ToArray();
+
+            //Calculate total sum of array
+            int totalsum = 0;
+            for (int i = 0; i < n; i++)
+            {
+                totalsum = totalsum + arr2[i];
+
+            }
+
+            //initiate a new array to store sum
+            int[] sum = new int[n];
+            sum[0] = arr2[0];
+            for (int i = 1; i < n; i++)
+            {
+                sum[i] = sum[i - 1] + arr2[i];
+            }
+            //initiate new boolean
+            bool balanced = false;
+
+            //if there is only one number in a array
+            if (n == 1)
+                balanced = true;
+            //check for sum of both side
+            if (totalsum > 0)
+            {
+                for (int i = 1; i < n; i++)
+                {
+                    long leftsum = sum[i - 1];
+                    long rightsum = sum[n - 1] - sum[i];
+                    if (leftsum == rightsum)
+                    {
+                        balanced = true;
+                        break;
+                    }
+                }
+            }
+            else
+                balanced = true;
+
+            // if there is only one number and rest are zero
+            for (int i = 0; i < n; i++)
+            {
+                if (totalsum == arr2[i])
+                {
+                    balanced = true;
+                }
+            }
+
+                if (balanced)
+                {
+
+                    return "YES";
+                }
+                else
+
+                    return "No";
         }
+    
+    
         //------------------------------------------------------------------------------------------------------------------
         // missing number method
         static int[] missingNumbers(int[] arr, int[] brr)
@@ -233,7 +299,7 @@ namespace Assignment2_S19
 
           selectionSort(arr3);
 
-            decimal median = 0;
+            int median = 0;
 
             if (count % 2 == 0)
 
@@ -253,7 +319,7 @@ namespace Assignment2_S19
 
             {
 
-                median = arr3[(count / 2)];  // count is odd, get the middle element.
+                median = (arr3[(count / 2)]);  // count is odd, get the middle element.
                 Console.ReadKey(true);
             }
             else if (count == 0)
@@ -266,8 +332,42 @@ namespace Assignment2_S19
         // Complete the closestNumbers function below.
         static int[] closestNumbers(int[] arr)
         {
-            return new int[] { };
+            int[] arr3 = arr;  //Define new array
+            int n = arr3.Length; //store length into a variable
+            selectionSort(arr3); //Sort the array
+
+
+
+            int[] sub = new int[n - 1]; //initiate new array for subtraction
+            for (int i = 0; i < n - 1; i++)
+            {
+                sub[i] = arr3[i + 1] - arr3[i]; // Subtract each element from its previous element
+
+            }
+            selectionSort(sub);   //sort new array
+            int[] sub1 = new int[n - 1];  //initiate new array to store the subtraction of elements of previous array
+            List<int> pair = new List<int>(); //create new list
+            int[] pair1 = new int[2 * (n - 1)]; // Initiate new array to store final values from the list
+            for (int i = 0; i < n - 1; i++)
+            {
+                sub1[i] = arr3[i + 1] - arr3[i]; // Subtract each element from its previous element from the new array
+                if (sub1[i] == sub[0]) //if element of array is equal to smallest element
+                {
+                    //Console.WriteLine( arr3[i] + "," + arr3[i + 1]);
+                    int temp1 = arr3[i]; // store 1st element of a pair
+                    int temp2 = +arr3[i + 1]; //store 2nd element of a pair
+                    pair.Add(temp1); //add element to list
+                    pair.Add(temp2);
+                }
+            }
+            pair1 = pair.ToArray(); //convert list to array
+            return pair1;
         }
+            
+
+
+           
+        
         //---------------------------------------------------------------------------------------------------------------
         // Complete the dayOfProgrammer function below.
         static string dayOfProgrammer(int year)
