@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Assignment2_S19
 {
-    class Program // rashmi test
+    class Program
     {
         static void Main(string[] args)
         {
@@ -47,7 +47,9 @@ namespace Assignment2_S19
             // find the median
             Console.WriteLine("\n\nFind the median");
             int[] arr2 = { 0, 1, 2, 4, 6, 5, 3};
-            Console.WriteLine(findMedian(arr2));
+            Console.WriteLine("median is :" + findMedian(arr2));
+            
+
 
             // closest numbers
             Console.WriteLine("\n\nClosest numbers");
@@ -73,7 +75,7 @@ namespace Assignment2_S19
                 Console.Write(n + " ");
             }
         }
-
+        //-------------------------------------------------------------------------------------------------------------------
         // method to perform selection sort in ascending order
         public static int[] selectionSort(int[] a)
         {
@@ -104,7 +106,7 @@ namespace Assignment2_S19
             return (a);
 
         } // end of selectionSort(int[] a) method
-
+        //---------------------------------------------------------------------------------------------------------------
         // method to find the sum of elements of an array
         static int arraySum(int[] a)
         {
@@ -119,7 +121,7 @@ namespace Assignment2_S19
             return (sum);
 
         } // end of method arraySum(int[] a) method
-
+        //-----------------------------------------------------------------------------------------------------------------
         // rotLeft method that returns an array rotated a specified  number of times
         static int[] rotLeft(int[] a, int d)
         {
@@ -136,7 +138,7 @@ namespace Assignment2_S19
             } // end of for loop i
             return a;
         } // end of rotLeft method
-
+        //----------------------------------------------------------------------------------------------------------------
         // method to find the maximum number of toys that can be bought in a given budget of k dollars
         static int maximumToys(int[] prices, int k)
         {
@@ -169,7 +171,7 @@ namespace Assignment2_S19
         {
             return "";
         }
-
+        //------------------------------------------------------------------------------------------------------------------
         // missing number method
         static int[] missingNumbers(int[] arr, int[] brr)
         {
@@ -215,25 +217,58 @@ namespace Assignment2_S19
             } // end of for loop i
             return missarray.Distinct().ToArray(); ;
         } // end of missingNumbers method
-
+        //-------------------------------------------------------------------------------------------------------------
         // Complete the gradingStudents function below.
         static int[] gradingStudents(int[] grades)
         {
             return new int[] { };
         }
-
+        //------------------------------------------------------------------------------------------------------------------
         // Complete the findMedian function below.
         static int findMedian(int[] arr)
         {
-            return 0;
-        }
+            int[] arr3 = arr;
 
+            int count = arr3.Length;
+
+          selectionSort(arr3);
+
+            decimal median = 0;
+
+            if (count % 2 == 0)
+
+            {
+
+                // count is even, need to get the middle two elements, add them together, then divide by 2
+
+                int middle1 = arr3[(count / 2) - 1]; //left middle element
+
+                int middle2 = arr3[(count / 2)]; //right middle element
+
+                median = (middle1 + middle2) / 2;
+
+            }
+
+            else if (count % 2 != 0)
+
+            {
+
+                median = arr3[(count / 2)];  // count is odd, get the middle element.
+                Console.ReadKey(true);
+            }
+            else if (count == 0)
+
+                Console.WriteLine("exception occure");
+
+            return median;
+        }
+        //------------------------------------------------------------------------------------------------------------
         // Complete the closestNumbers function below.
         static int[] closestNumbers(int[] arr)
         {
             return new int[] { };
         }
-
+        //---------------------------------------------------------------------------------------------------------------
         // Complete the dayOfProgrammer function below.
         static string dayOfProgrammer(int year)
         {
